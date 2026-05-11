@@ -1,0 +1,5 @@
+{
+  "check_interval": 5,
+  "output_dir": "output",
+  "auto_remux": true
+}

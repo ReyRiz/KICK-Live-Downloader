@@ -1,0 +1,24 @@
+# Git ignore file for KickLiveArchiver
+# Ignore Python cache and venv
+__pycache__/
+*.pyc
+.venv/
+
+# Ignore build and output artifacts
+build/
+dist/
+output/
+logs/
+
+# Ignore ffmpeg binaries and docs
+ffmpeg/
+
+# Ignore PyInstaller build files
+*.spec
+*.toc
+*.pyz
+*.exe
+
+# Ignore system files
+.DS_Store
+Thumbs.db
