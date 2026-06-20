@@ -3,6 +3,7 @@ import re
 import datetime
 import locale
 import time
+from typing import List
 
 def sanitize_filename(text: str) -> str:
     text = re.sub(r'[\\/:*?"<>|]', '', text)
@@ -32,7 +33,7 @@ def make_unique_path(path: str) -> str:
             return candidate
         counter += 1
 
-def make_numbered_stem(stem_path: str, exts: list[str]) -> str:
+def make_numbered_stem(stem_path: str, exts: List[str]) -> str:
     """Return a unique stem by appending ' #N' (starting at 1).
 
     Example: make_numbered_stem('output/Foo - 13 Maret 2026', ['.mp4', '.ts'])

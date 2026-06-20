@@ -68,7 +68,12 @@ class AppUI(ctk.CTk):
 
     # ===== UI CONTROL =====
     def start(self):
-        started = bool(self.start_callback(self.url_entry.get()))
+        try:
+            started = bool(self.start_callback(self.url_entry.get()))
+        except Exception as e:
+            self.add_log(f"Start failed: {e}")
+            started = False
+
         if not started:
             self.monitoring_start = None
             self.recording_start = None
@@ -82,7 +87,10 @@ class AppUI(ctk.CTk):
     def stop(self):
         self.monitoring_start = None
         self.recording_start = None
-        self.stop_callback()
+        try:
+            self.stop_callback()
+        except Exception as e:
+            self.add_log(f"Stop failed: {e}")
         self.set_status("OFFLINE")
 
     def set_status(self, status):
@@ -154,7 +162,10 @@ class AppUI(ctk.CTk):
 
     def _on_close(self):
         self.running = False
-        self.stop_callback()
+        try:
+            self.stop_callback()
+        except Exception:
+            pass
         self.destroy()
 
     def _fmt(self, sec):

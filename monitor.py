@@ -1,4 +1,5 @@
 from utils import log
+from urllib.parse import urlparse
 
 
 def _is_live_via_streamlink(channel_url: str) -> bool:
@@ -17,7 +18,9 @@ def _is_live_via_streamlink(channel_url: str) -> bool:
         return False
 
 def check_live(channel_url: str) -> dict:
-    username = channel_url.rstrip("/").split("/")[-1]
+    parsed = urlparse(channel_url.strip())
+    path = parsed.path if parsed.scheme else channel_url.strip()
+    username = path.strip("/").split("/")[-1] or "channel"
 
     if _is_live_via_streamlink(channel_url):
         return {
